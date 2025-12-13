@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 
-public class TrashBin : MonoBehaviour, IInteractable // Kế thừa từ Interface vừa tạo
+public class TrashBin : MonoBehaviour, IInteractable
 {
+    // Biến để kiểm tra xem thùng rác này lục chưa
+    private bool _isLooted = false;
+
     public void Interact()
     {
-        // Logic khi bấm E vào thùng rác
-        Debug.Log("Lục lọi thùng rác... Nhặt được 1 cái chai nhựa!");
+        if (_isLooted)
+        {
+            Debug.Log("Thùng này lục rồi, còn cái nịt thôi!");
+            return;
+        }
 
-        // (Tạm thời) Đổi màu để biết là đã tương tác
+        // --- ĐOẠN MỚI ---
+        // Random tiền từ 1 đến 10 đồng
+        int randomMoney = Random.Range(1, 10);
+
+        // Gọi thằng PlayerStats cộng tiền vào
+        PlayerStats.Instance.AddMoney(randomMoney);
+
+        Debug.Log($"Nhặt được {randomMoney} đồng!");
+        // ----------------
+
+        // Đổi màu thùng rác sang xám (báo hiệu đã lục xong)
         GetComponent<SpriteRenderer>().color = Color.gray;
-
-        // Sau này sẽ code thêm: +1 Chai nhựa vào túi đồ
+        _isLooted = true;
     }
 }
