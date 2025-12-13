@@ -17,6 +17,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentHunger;
     [SerializeField] private float _hungerDropRate = 1f; // Tụt 1 điểm mỗi giây
 
+    public int CurrentMoney => _money;
+
     private void Awake()
     {
         // Setup Singleton
